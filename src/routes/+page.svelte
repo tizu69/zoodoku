@@ -4,6 +4,7 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import ManageSaveOverlay from './ManageSaveOverlay.svelte';
+	import API from '#api';
 
 	let daily = $derived(loadDailyResult());
 	let lastDaily = $derived(dailyResult.current);
@@ -14,6 +15,16 @@
 
 <main class="mt-1/3 mx-auto flex min-h-dvh max-w-lg flex-col items-center p-8">
 	<img src="/icons/icon.svg" alt="logo" class="size-2/3" />
+
+	<button
+		onclick={async () => {
+			const r = await API.greet({ name: prompt('whats ur name') ?? undefined });
+			alert(r.greeting);
+		}}
+	>
+		hi
+	</button>
+
 	{#if browser}
 		<button
 			class="mt-4 w-full clicky rounded-lg border border-depress bg-layer p-4 drop-shadow"

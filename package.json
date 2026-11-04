@@ -15,6 +15,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@bufbuild/protoc-gen-es": "^2.16.0",
 		"@sveltejs/adapter-auto": "^8.0.0",
 		"@sveltejs/kit": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
@@ -31,9 +32,14 @@
 	},
 	"imports": {
 		"#lib": "./src/lib/index.js",
+		"#api": "./src/api/index.js",
 		"#lib/*": "./src/lib/*"
 	},
 	"dependencies": {
+		"@bufbuild/protobuf": "^2.16.0",
+		"@bufbuild/protovalidate": "^1.3.0",
+		"@connectrpc/connect": "^2.3.0",
+		"@connectrpc/connect-web": "^2.3.0",
 		"@lucide/svelte": "^1.61.0",
 		"@tsparticles/confetti": "^4.4.0",
 		"runed": "^0.38.0",

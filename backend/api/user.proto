@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api;
+
+import "buf/validate/validate.proto";
+
+message CreateUserRequest {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 3
+    max_len: 16
+  }];
+}
+
+message CreateUserResponse {
+  string name = 1;
+  string friendcode = 2;
+}
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+}

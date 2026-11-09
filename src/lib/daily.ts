@@ -14,6 +14,10 @@ function dateNumber(key: string): number {
 	return Date.UTC(year, month - 1, day) / 86_400_000;
 }
 
+export function dateDiff(date2: string, date1 = dateKey()) {
+	return dateNumber(date1) - dateNumber(date2);
+}
+
 export function dailyDay(date = new Date()): number {
 	const day = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
 	const start = Date.UTC(2026, 0, 1);
@@ -39,8 +43,7 @@ export function saveDailyResult(
 	const today = dateKey(date);
 	const current = loadDailyResult(date);
 	const previous = dailyResult.current;
-	const continuesStreak =
-		previous?.result === 'win' && dateNumber(today) - dateNumber(previous.date) === 1;
+	const continuesStreak = previous?.result === 'win' && dateDiff(previous.date, today) === 1;
 	const streak =
 		result.result === 'win'
 			? current?.result === 'win'

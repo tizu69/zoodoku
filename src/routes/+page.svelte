@@ -1,6 +1,6 @@
 <script>
 	import { dailyResult, level } from '#lib/config.svelte.ts';
-	import { loadDailyResult } from '#lib/daily.ts';
+	import { loadDailyResult, dateDiff } from '#lib/daily.ts';
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import ManageSaveOverlay from './ManageSaveOverlay.svelte';
@@ -23,7 +23,11 @@
 			{#if daily}
 				<p class="text-xs">{daily.streak} day streak</p>
 			{:else if lastDaily?.result === 'win'}
-				<p class="text-xs">Don't lose your {lastDaily.streak} day streak!</p>
+				{#if dateDiff(lastDaily.date) === 1}
+					<p class="text-xs">Don't lose your {lastDaily.streak} day streak!</p>
+				{:else}
+					<p class="text-xs">You lost the game at a {lastDaily.streak} day streak :(</p>
+				{/if}
 			{/if}
 		</button>
 		<button
